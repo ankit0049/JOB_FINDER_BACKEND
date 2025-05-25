@@ -15,6 +15,7 @@ const app = express();
 dotenv.config({path:'config.env'}); 
 
 
+console.log("Allowed origin:", process.env.FRONTEND_URL);
 
   
 app.use(cors(
@@ -24,6 +25,7 @@ app.use(cors(
     credentials: true
   }
 ))
+console.log("Allowed origin:", process.env.FRONTEND_URL);
 
 
 

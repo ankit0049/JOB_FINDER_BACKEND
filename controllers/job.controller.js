@@ -142,7 +142,8 @@ export const getSingleJob = catchAsyncError(async (req, res, next) => {
 
 
 
-export const toggleJobExpiration = async (req, res) => {
+export const toggleJobExpiration =catchAsyncError( async (req, res) => { 
+  console.log("Toggle Job Expiration Endpoint Hit");
   try {
     const job = await Job.findById(req.params.id);
     if (!job) return res.status(404).json({ message: "Job not found" });
@@ -154,4 +155,4 @@ export const toggleJobExpiration = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+});

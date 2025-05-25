@@ -13,7 +13,7 @@ import { toggleJobExpiration } from"../controllers/job.controller.js";
 const router = express.Router();
 
 
-router.put("/toggle-expired/:id", toggleJobExpiration);
+router.put("/toggle-expired/:id",isAutherized, toggleJobExpiration);
 router.get("/getall", getAllJobs);
 router.post("/post", isAutherized, postJob);
 router.get("/getmyjobs", isAutherized, getMyJobs);
