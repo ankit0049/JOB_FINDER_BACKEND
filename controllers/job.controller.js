@@ -138,4 +138,20 @@ export const getSingleJob = catchAsyncError(async (req, res, next) => {
   } catch (error) {
     return next(new ErrorHandler(`Invalid ID / CastError`, 404));
   }
-});
+}); 
+
+
+
+export const toggleJobExpiration = async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.id);
+    if (!job) return res.status(404).json({ message: "Job not found" });
+
+    job.expired = !job.expired;
+    await job.save();
+
+    res.status(200).json({ message: `Job ${job.expired ? "marked as expired" : "reopened"} successfully.` });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

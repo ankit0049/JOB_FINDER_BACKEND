@@ -6,7 +6,7 @@ import { User } from "../models/user.model.js";
 
 export const register =catchAsyncError( async(req , res , next)=>{
    const {name , email , phone , role , password} = req.body ;
-   
+   console.log("req.body" , req.body);
    if(!name || !email || !password || !role || !phone )
    {
     return next(new ErrorHandler("Please Fill All Credintial Carefully !" ,400));

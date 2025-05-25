@@ -12,7 +12,7 @@ import { dbConnection } from './database/dbConnection.js';
 import { errroMiddleware } from './middlewares/error.middleware.js';
 
 const app = express(); 
-dotenv.config({path:'config/config.env'}); 
+dotenv.config({path:'config.env'}); 
 
 
 
