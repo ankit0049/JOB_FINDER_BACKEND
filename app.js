@@ -15,18 +15,24 @@ const app = express();
 dotenv.config({path:'config.env'}); 
 
 
-console.log("Allowed origin:", process.env.FRONTEND_URL);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://job-dekho-frontend.vercel.app"
+];
 
-  
-app.use(cors(
-  {
-    origin : process.env.FRONTEND_URL , 
-    methods: ["GET" , "POST" , "DELETE" , "PATCH"] , 
-    credentials: true
-  }
-))
-console.log("Allowed origin:", process.env.FRONTEND_URL);
-
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      console.log(" Allowed Origin:", origin);
+      callback(null, true);
+    } else {
+      console.log("Blocked Origin:", origin);
+      callback(new Error("CORS not allowed for this origin"));
+    }
+  },
+  methods: ["GET", "POST", "DELETE", "PATCH"],
+  credentials: true
+}));
 
 
 app.use(cookieParser());
