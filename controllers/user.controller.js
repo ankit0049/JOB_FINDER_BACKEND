@@ -70,21 +70,22 @@ sendToken(user , 200 , res , "User Logged In")
 
 }); 
 
-
 export const logout = catchAsyncError(async (req, res, next) => {
   res
     .status(200)
-    .cookie("token", null, {
+    .cookie("token", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // optional
-      sameSite: "lax", // or 'none' if cross-site
-      expires: new Date(0),
+      secure: true,           
+      sameSite: "None",       
+      expires: new Date(0),   
+      path: "/",              
     })
     .json({
       success: true,
       message: "User Successfully Logged Out!",
     });
 });
+
 
 
 export const getUser = catchAsyncError((req, res, next) => {
